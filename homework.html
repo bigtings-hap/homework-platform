@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+        input[type="file"],
+        input[type="text"],
+        input[type="audio"],
+        input[type="submit"] {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        audio {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1> Homework Platform test </h1>
+</header>
+
+<section>
+    <form action="/submit_homework" method="post" enctype="multipart/form-data">
+        <!-- Student Name -->
+        <label for="student_name">Student Name:</label>
+        <input type="text" id="student_name" name="student_name" required>
+
+        <!-- Homework Description (optional) -->
+        <label for="homework_desc">Homework Description:</label>
+        <input type="text" id="homework_desc" name="homework_desc">
+
+        <!-- Homework File (Video or Audio Questions Upload) -->
+        <label for="homework_file">Upload Homework (Video/Audio Questions):</label>
+        <input type="file" id="homework_file" name="homework_file" accept="audio/*, video/*" required>
+
+        <!-- IP Address (for home verification) -->
+        <label for="ip_address">IP Address:</label>
+        <input type="text" id="ip_address" name="ip_address" placeholder="Automatically Detected" readonly>
+
+        <!-- Answer Upload (Audio/Text) -->
+        <label for="answer_file">Upload Answer (Audio/Text):</label>
+        <input type="file" id="answer_file" name="answer_file" accept="audio/*, text/plain" required>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Submit Homework">
+    </form>
+</section>
+
+<script>
+    // Auto-detect and display user's IP address (requires backend support for real functionality)
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('ip_address').value = data.ip;
+        });
+</script>
+
+</body>
+</html>
